@@ -4,10 +4,14 @@ import Users from "./Pages/Users.js";
 import Posts from "./Pages/Post/Posts.jsx";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import SignIn from "./Pages/SignIn.js";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 function App() {
   const [user, setUser] = useState(false);
   // return <Posts name="lostDocument" />;
+  useEffect(() => {
+    const userStatus = sessionStorage.getItem("user");
+    if (userStatus) return setUser(true);
+  }, []);
   return (
     <div>
       <div
@@ -58,7 +62,10 @@ function App() {
             path="/lostDocument"
             element={<Posts user={user} name="lostDocument" />}
           />
-          <Route path="/signin" element={<SignIn setUser={setUser} />} />
+          <Route
+            path="/signin"
+            element={<SignIn setUser={setUser} user={user} />}
+          />
         </Routes>
       </BrowserRouter>
     </div>

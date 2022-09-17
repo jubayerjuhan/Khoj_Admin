@@ -13,7 +13,7 @@ const Posts = ({ name = "foundPerson", user }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!user) navigate("/signin");
+    // if (!user) navigate("/signin");
 
     client.get(`/${name}`).then((user) => {
       console.log(user.data[secName]);
