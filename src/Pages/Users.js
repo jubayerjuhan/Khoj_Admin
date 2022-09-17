@@ -1,11 +1,15 @@
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import client from "../client.js";
 import "./Users.css";
-const Users = () => {
+const Users = ({ user }) => {
+  const navigate = useNavigate();
   const [users, setUsers] = useState([]);
   useEffect(() => {
+    if (!user) navigate("/signin");
+
     client.get("/users").then((user) => {
       setUsers(user.data.users);
       console.log(user.data.users);

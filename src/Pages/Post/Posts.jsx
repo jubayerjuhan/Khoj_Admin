@@ -1,13 +1,16 @@
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import client from "../../client.js";
 // import "./Users.css";
-const Posts = ({ name = "foundPerson" }) => {
+const Posts = ({ name = "foundPerson", user }) => {
   const [posts, setPosts] = useState([]);
   let secName = "";
   if (name === "lostPerson") secName = name + "";
   else secName = name + "s";
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     client.get(`/${name}`).then((user) => {

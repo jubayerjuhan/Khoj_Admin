@@ -3,7 +3,10 @@ import "./App.css";
 import Users from "./Pages/Users.js";
 import Posts from "./Pages/Post/Posts.jsx";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import SignIn from "./Pages/SignIn.js";
+import { useState } from "react";
 function App() {
+  const [user, setUser] = useState(false);
   // return <Posts name="lostDocument" />;
   return (
     <div>
@@ -38,14 +41,24 @@ function App() {
       </div>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Users />} />
-          <Route path="/foundPerson" element={<Posts name="foundPerson" />} />
-          <Route path="/lostPerson" element={<Posts name="lostPerson" />} />
+          <Route path="/" element={<Users user={user} />} />
+          <Route
+            path="/foundPerson"
+            element={<Posts user={user} name="foundPerson" />}
+          />
+          <Route
+            path="/lostPerson"
+            element={<Posts user={user} name="lostPerson" />}
+          />
           <Route
             path="/foundDocument"
-            element={<Posts name="foundDocument" />}
+            element={<Posts user={user} name="foundDocument" />}
           />
-          <Route path="/lostDocument" element={<Posts name="lostDocument" />} />
+          <Route
+            path="/lostDocument"
+            element={<Posts user={user} name="lostDocument" />}
+          />
+          <Route path="/signin" element={<SignIn setUser={setUser} />} />
         </Routes>
       </BrowserRouter>
     </div>
