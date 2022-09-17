@@ -13,6 +13,8 @@ const Posts = ({ name = "foundPerson", user }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (!user) navigate("/signin");
+
     client.get(`/${name}`).then((user) => {
       console.log(user.data[secName]);
       setPosts(user.data[secName]);
